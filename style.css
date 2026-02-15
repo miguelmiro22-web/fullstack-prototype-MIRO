@@ -1,0 +1,48 @@
+/* Page visibility control */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Authentication state control */
+body.not-authenticated .role-logged-in {
+    display: none;
+}
+
+body.authenticated .role-logged-out {
+    display: none;
+}
+
+/* Admin role control */
+.role-admin {
+    display: none;
+}
+
+body.is-admin .role-admin {
+    display: block;
+}
+
+/* Admin role control */
+.card {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+table {
+    font-size: 0.9rem;
+}
+
+.badge {
+    font-size: 0.85rem;
+}
+
+.modal-backdrop {
+    z-index: 1040;
+}
+
+.modal {
+    z-index: 1050;
+}
