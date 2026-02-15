@@ -12,91 +12,104 @@
 <body class="not-authenticated">
     
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#/">Full-Stack App (Your Full Name)</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <!-- Logged Out Links -->
-                    <li class="nav-item role-logged-out">
-                        <a class="nav-link" href="#/login">Login</a>
-                    </li>
-                    <li class="nav-item role-logged-out">
-                        <a class="nav-link" href="#/register">Register</a>
-                    </li>
-                    
-                    <!-- Logged In Dropdown -->
-                    <li class="nav-item dropdown role-logged-in">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                            <span id="username-display">User</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#/profile">Profile</a></li>
-                            <li><a class="dropdown-item" href="#/requests">My Requests</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
-                        </ul>
-                    </li>
-                    
-                    <!-- Admin Links -->
-                    <li class="nav-item role-admin">
-                        <a class="nav-link" href="#/employees">Employees</a>
-                    </li>
-                    <li class="nav-item role-admin">
-                        <a class="nav-link" href="#/accounts">Accounts</a>
-                    </li>
-                    <li class="nav-item role-admin">
-                        <a class="nav-link" href="#/departments">Departments</a>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#/">Full-Stack App (Aira Miguel A. Miro)</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Logged Out Links -->
+                <li class="nav-item role-logged-out">
+                    <a class="nav-link" href="#/login">Login</a>
+                </li>
+                <li class="nav-item role-logged-out">
+                    <a class="nav-link" href="#/register">Register</a>
+                </li>
+                
+                <!-- Logged In Dropdown -->
+                <li class="nav-item dropdown role-logged-in">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                        <span id="username-display">User</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#/profile">Profile</a></li>
+                        <li><a class="dropdown-item" href="#/requests">My Requests</a></li>
+                        
+                        <!-- Admin-only links inside dropdown -->
+                        <li><hr class="dropdown-divider role-admin"></li>
+                        <li class="role-admin"><a class="dropdown-item" href="#/employees">Employees</a></li>
+                        <li class="role-admin"><a class="dropdown-item" href="#/accounts">Accounts</a></li>
+                        <li class="role-admin"><a class="dropdown-item" href="#/departments">Departments</a></li>
+                        
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#" id="logout-btn">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Main Content -->
     <main class="container mt-4">
         
         <!-- Home Page -->
-        <section id="home-page" class="page active">
-            <h1>Welcome to Full-Stack App</h1>
-            <p class="lead">A role-based single-page application prototype</p>
-            <div class="alert alert-info">
-                <strong>Getting Started:</strong> Register an account or login with the admin account:
-                <br><code>Email: admin@example.com</code>
-                <br><code>Password: Password123!</code>
-            </div>
-        </section>
+<section id="home-page" class="page active">
+    <h1>Welcome to Full-Stack App</h1>
+    <p class="lead">A static prototype before backend integration. Simulates:</p>
+    <ul class="list-unstyled ms-4">
+        <li class="mb-2">• Email registration + fake verification</li>
+        <li class="mb-2">• Login with JWT-like token simulation</li>
+        <li class="mb-2">• Role-based UI (Admin/User)</li>
+        <li class="mb-2">• CRUD for Employees, Departments, Requests</li>
+    </ul>
+    <div class="alert alert-info d-flex align-items-start mt-4">
+        <div class="me-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill text-warning" viewBox="0 0 16 16">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+        </div>
+        <div>
+            <strong>Note:</strong> All data is stored in <code>localStorage</code>. Refresh to reset.
+        </div>
+    </div>
+    
+    <!-- Get Started Button -->
+    <div class="mt-4">
+        <a href="#/register" class="btn btn-primary btn-lg">Get Started →</a>
+    </div>
+</section>
 
         <!-- Register Page -->
-        <section id="register-page" class="page">
-            <h2>Register</h2>
-            <div class="card">
-                <div class="card-body">
-                    <form id="register-form">
-                        <div class="mb-3">
-                            <label for="reg-firstname" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="reg-firstname" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="reg-lastname" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="reg-lastname" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="reg-email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="reg-email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="reg-password" class="form-label">Password (min 6 characters)</label>
-                            <input type="password" class="form-control" id="reg-password" required minlength="6">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </form>
+<section id="register-page" class="page">
+    <h2>Register</h2>
+    <div class="card">
+        <div class="card-body">
+            <form id="register-form">
+                <div class="mb-3">
+                    <label for="reg-firstname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="reg-firstname" required>
                 </div>
-            </div>
-        </section>
+                <div class="mb-3">
+                    <label for="reg-lastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="reg-lastname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reg-email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="reg-email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reg-password" class="form-label">Password (min 6 characters)</label>
+                    <input type="password" class="form-control" id="reg-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <a href="#/" class="btn btn-secondary ms-2">Cancel</a>
+            </form>
+        </div>
+    </div>
+</section>
 
         <!-- Verify Email Page -->
         <section id="verify-email-page" class="page">
