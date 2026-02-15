@@ -689,7 +689,11 @@ function deleteEmployee(empId) {
 //Phase 7: User requests
 function renderRequestsList() {
     const container = document.getElementById('requests-list');
-    const userRequests = window.db.requests.filter(req => req.employeeEmail === currentUser.email);
+    
+    // For admin: show ALL requests. For users: show only their requests
+    const userRequests = currentUser.role === 'admin' 
+        ? window.db.requests 
+        : window.db.requests.filter(req => req.employeeEmail === currentUser.email);
     
     if (userRequests.length === 0) {
         container.innerHTML = '<p class="text-muted">No requests yet.</p>';
@@ -701,9 +705,11 @@ function renderRequestsList() {
             <thead>
                 <tr>
                     <th>Date</th>
+                    ${currentUser.role === 'admin' ? '<th>Employee</th>' : ''}
                     <th>Type</th>
                     <th>Items</th>
                     <th>Status</th>
+                    ${currentUser.role === 'admin' ? '<th>Actions</th>' : ''}
                 </tr>
             </thead>
             <tbody>
@@ -716,9 +722,19 @@ function renderRequestsList() {
         html += `
             <tr>
                 <td>${req.date}</td>
+                ${currentUser.role === 'admin' ? `<td>${req.employeeEmail}</td>` : ''}
                 <td>${req.type}</td>
                 <td>${itemsList}</td>
                 <td><span class="badge bg-${statusClass}">${req.status}</span></td>
+                ${currentUser.role === 'admin' ? `
+                    <td>
+                        ${req.status === 'Pending' ? `
+                            <button class="btn btn-sm btn-success" onclick="updateRequestStatus(${req.id}, 'Approved')">Approve</button>
+                            <button class="btn btn-sm btn-danger" onclick="updateRequestStatus(${req.id}, 'Rejected')">Reject</button>
+                        ` : ''}
+                        <button class="btn btn-sm btn-danger" onclick="deleteRequest(${req.id})">Delete</button>
+                    </td>
+                ` : ''}
             </tr>
         `;
     });
@@ -863,6 +879,36 @@ function showToast(message, type = 'info') {
     
     const toast = new bootstrap.Toast(toastElement);
     toast.show();
+}
+
+function updateRequestStatus(requestId, newStatus) {
+    if (currentUser.role !== 'admin') {
+        showToast('Access denied', 'danger');
+        return;
+    }
+    
+    const request = window.db.requests.find(r => r.id === requestId);
+    if (request) {
+        request.status = newStatus;
+        saveToStorage();
+        renderRequestsList();
+        showToast(`Request ${newStatus.toLowerCase()} successfully`, 'success');
+    }
+}
+
+// Delete request (admin only)
+function deleteRequest(requestId) {
+    if (currentUser.role !== 'admin') {
+        showToast('Access denied', 'danger');
+        return;
+    }
+    
+    if (confirm('Are you sure you want to delete this request?')) {
+        window.db.requests = window.db.requests.filter(r => r.id !== requestId);
+        saveToStorage();
+        renderRequestsList();
+        showToast('Request deleted successfully', 'success');
+    }
 }
 
 //Initialization
