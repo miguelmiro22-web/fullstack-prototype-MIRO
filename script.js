@@ -897,6 +897,23 @@ function updateRequestStatus(requestId, newStatus) {
 }
 
 // Delete request (admin only)
+// Update request status (admin only)
+function updateRequestStatus(requestId, newStatus) {
+    if (currentUser.role !== 'admin') {
+        showToast('Access denied', 'danger');
+        return;
+    }
+    
+    const request = window.db.requests.find(r => r.id === requestId);
+    if (request) {
+        request.status = newStatus;
+        saveToStorage();
+        renderRequestsList();
+        showToast(`Request ${newStatus.toLowerCase()} successfully`, 'success');
+    }
+}
+
+// Delete request (admin only)
 function deleteRequest(requestId) {
     if (currentUser.role !== 'admin') {
         showToast('Access denied', 'danger');
